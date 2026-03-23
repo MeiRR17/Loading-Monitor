@@ -14,8 +14,7 @@ COPY requirements.txt .
 # run install command inside the container during the build process.
 # This will install all the packages listed in the requirments.txt file, which are necessary for our FastAPI application to run.
 # The --no-cache-dir option is used to prevent pip from caching the packages, which can help reduce the size of the final image.
-RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --no-cache-dir --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -r requirements.txt
 # copying the main.py file from our local to the app directory in the container.
 # This file contains the code for our FastAPI application, and we need to copy it into the container so that it can be executed when the container is run.
 COPY main.py .

@@ -3,9 +3,6 @@
 # שימוש בתמונת בסיס קלה של פייתון
 FROM python:3.11-slim-bookworm
 
-# התקנת כלי מערכת הכרחיים כדי שפייתון יוכל לדבר עם PostgreSQL
-RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
-
 # הגדרת תיקיית העבודה בתוך המכולה
 WORKDIR /app
 
@@ -13,8 +10,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # התקנת הספריות
-RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --no-cache-dir --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -r requirements.txt
 # העתקת קבצי הקוד שלנו (main.py ו- models.py)
 COPY . .
 
